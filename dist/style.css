@@ -1,0 +1,32 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". . . . . .";
+    height: 100vh;
+  }
+  
+  .container-todo {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0px 0px;
+    grid-template-areas: "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos";
+    grid-area: container-todo;
+  }
+  
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0px 0px;
+    grid-template-areas: "header header header" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent";
+    grid-area: projects;
+  }
+  
+  .header { grid-area: header; background-color: coral; }
+  
+  .projectcontent { grid-area: projectcontent; background-color: crimson; }
+  
+  .todos { grid-area: todos; background-color: darkblue; }

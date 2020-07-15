@@ -1,0 +1,24 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "Todo list for TOP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buidl": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephanewillems/todo-list.git"
+  },
+  "author": "Stéphane Willems",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephanewillems/todo-list/issues"
+  },
+  "homepage": "https://github.com/stephanewillems/todo-list#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
