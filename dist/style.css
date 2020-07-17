@@ -1,3 +1,9 @@
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+/* Variables */
+
+
+
+/* classes */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -27,6 +33,28 @@
   
   .header { grid-area: header; background-color: coral; }
   
-  .projectcontent { grid-area: projectcontent; background-color: crimson; }
+  .projectcontent { grid-area: projectcontent; border:1px solid rgb(196, 196, 196); border-radius: 5%; }
   
   .todos { grid-area: todos; background-color: darkblue; }
+  .btn{
+    margin-top:10px;
+    margin-left:10px;
+    padding: 4px 6px 4px 7px;
+    background:none;
+    border-radius: 70%;
+    border: 1px solid #d3d3d3;
+  }
+
+  .btn::before{
+    color:rgb(83, 83, 83);
+    content: '\f067'; /* You should use \ and not /*/
+    font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: 900;
+    font-size:15px;
+  }
+
+  .btn:hover::before{
+    color:rgb(216, 14, 14);
+  }
+
