@@ -24,6 +24,9 @@ const viewTodo = (() =>{
 
 
     function createProject(id,name,desc,task,counter){
+
+//      ADD REMOVE BUTTON NEXT TO LI ( CHECK VIEW AND CONTROLLER + CSS)
+
         let list = document.createElement('li');
         list.setAttribute("id",id);
         list.classList.add('p_listitems');

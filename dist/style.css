@@ -58,6 +58,8 @@
   .btn:hover::before{
     color:rgb(216, 14, 14);
   }
+
+  /* change to button next to LI!!! */
 .p_listitems::after{
 
     color:rgb(173, 68, 68);

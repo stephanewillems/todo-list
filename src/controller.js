@@ -12,9 +12,10 @@ const controlTodo = (()=>{
 
 let btn = document.querySelector('.btn');
 
-btn.addEventListener('click', printClick);
+btn.addEventListener('click', createProject);
+removebtn.addEventListener('click',checkC);
 
-function printClick(e){
+function createProject(e){
         let id = todoModel.getListLength();
         let name = prompt("what is the name of the project?");
         let desc = prompt("what is the description of the project?");
@@ -22,10 +23,10 @@ function printClick(e){
         todoModel.newProject(id,name,desc);
         todoModel.getProject();
    //let project = todoModel.todoProject()
-            
-
-
+        
 }
+
+
 
 
 
