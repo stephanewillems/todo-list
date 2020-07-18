@@ -29,11 +29,12 @@
     gap: 0px 0px;
     grid-template-areas: "header header header" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent";
     grid-area: projects;
+    
   }
   
   .header { grid-area: header; background-color: coral; }
   
-  .projectcontent { grid-area: projectcontent; border:1px solid rgb(196, 196, 196); border-radius: 5%; }
+  .projectcontent { grid-area: projectcontent; border:1px solid rgb(196, 196, 196); border-radius: 5%;overflow-y: scroll;;}
   
   .todos { grid-area: todos; background-color: darkblue; }
   .btn{
@@ -57,4 +58,20 @@
   .btn:hover::before{
     color:rgb(216, 14, 14);
   }
+.p_listitems::after{
+
+    color:rgb(173, 68, 68);
+    content: '\f056'; /* You should use \ and not /*/
+    font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: 900;
+    font-size:15px;
+    padding-left: 10px;
+
+
+}
+.ul_plistitems{
+    grid-column-start: 1;
+    grid-column-end:4;
+}
 
