@@ -49,8 +49,9 @@ function newProject(id,name,desc,task=[],counter){
 }
 
 
-function getProject(){
-   console.log(projArr);
+function getProject(id){
+   console.log(projArr[id]);
+   //return projArr[id];
 }
 
 

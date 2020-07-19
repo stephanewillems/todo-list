@@ -9,12 +9,20 @@ import { viewTodo } from "./view";
 const controlTodo = (()=>{
 
 
+    //cache dom
+const btn = document.querySelector('.btn');
+const plist = document.querySelectorAll('.ul_plistitems');
 
-let btn = document.querySelector('.btn');
+    //eventlisteners
 
 btn.addEventListener('click', createProject);
-removebtn.addEventListener('click',checkC);
+plist.forEach((items)=>{
+    items.addEventListener('click',detailsProject);
+})
+//plist.addEventListener('click',detailsProject);
 
+
+// add project
 function createProject(e){
         let id = todoModel.getListLength();
         let name = prompt("what is the name of the project?");
@@ -24,6 +32,21 @@ function createProject(e){
         todoModel.getProject();
    //let project = todoModel.todoProject()
         
+}
+
+//click on project to get todo's from project
+
+
+
+function detailsProject(e){
+    if(e.target.matches('li')){
+        console.log(e.target);
+        todoModel.getProject(e.target.id);
+    }else if(e.target.matches('.removeP')){
+           console.log(e.target);
+        } else {
+            console.log("wrong");
+        }
 }
 
 

@@ -28,13 +28,19 @@ const viewTodo = (() =>{
 //      ADD REMOVE BUTTON NEXT TO LI ( CHECK VIEW AND CONTROLLER + CSS)
 
         let list = document.createElement('li');
+        let del = document.createElement('button');
+        del.classList.add('removeP');
         list.setAttribute("id",id);
         list.classList.add('p_listitems');
         list.innerHTML= name;
+        list.appendChild(del);
         projectsList.appendChild(list);
    
     
     }
+
+    //show todo function
+
 
 
     
