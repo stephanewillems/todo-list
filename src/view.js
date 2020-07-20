@@ -24,9 +24,7 @@ const viewTodo = (() =>{
 
 
     function createProject(id,name,desc,task,counter){
-
-//      ADD REMOVE BUTTON NEXT TO LI ( CHECK VIEW AND CONTROLLER + CSS)
-
+        
         let list = document.createElement('li');
         let del = document.createElement('button');
         del.classList.add('removeP');
@@ -38,6 +36,29 @@ const viewTodo = (() =>{
    
     
     }
+
+
+    function removeProj(id){
+        let el = document.getElementById(id);
+        let projectlistLi = document.querySelectorAll('.p_listitems');
+        let id_li = 0;
+        el.parentNode.removeChild(el);
+        for(let i = 0; i< todoModel.projArr.length; i++){
+            todoModel.projArr[i]["id"] = i;
+            projectlistLi.setAttribute('id',i);
+        }
+
+
+        }
+
+
+    function render(){
+        todoModel.projArr.forEach((e) => {
+           // console.log(`${e["id"]}&& ${e["name"]}`);
+           return createProject(e["id"],e["name"],e["desc"]);
+    })
+        }
+
 
     //show todo function
 
@@ -51,6 +72,8 @@ const viewTodo = (() =>{
 
 return {
             createProject,
+            render,
+            removeProj
 }
 
 

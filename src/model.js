@@ -6,8 +6,8 @@ const todoModel= (()=>{
 
 let projArr = [];
  let counterP = 0;
-const todoProject = (id,name,desc,task,counter)=>{
-       
+const _todoProject = (id,name,desc,task,counter)=>{
+   id = getListLength()-1;
       return {
       id,
       name,
@@ -40,10 +40,12 @@ function addTask(proj,todo){
 function doneTodo(todo){
    return !todo.checked? todo.checked = true : todo.checked = false;
 }
+//Create new project
 
-function newProject(id,name,desc,task=[],counter){
+function newProject(name,desc,task=[],counter){
+  
 
-    let project = todoProject(id,name,desc,task,counter);
+    let project = _todoProject(name,desc,task,counter);
     projArr.push(project);
     return project;
 }
@@ -64,18 +66,29 @@ function getListLength(){
     return document.querySelectorAll('.projects>ul>li').length;
 }
 
+function removeProject(id){
+   return projArr.splice(id,1);
+
+   //console.log(projArr[id]);
+
+
+}
+function setId(item){
+    return projArr.indexOf(item);
+}
 
 
 
     return{
-        todoProject,
         todoTask,
         addTask,
         doneTodo,
         removeTodo,
         getListLength,
         newProject,
-        getProject
+        getProject,
+        removeProject,
+        projArr
     }
 })()
 

@@ -24,15 +24,16 @@ plist.forEach((items)=>{
 
 // add project
 function createProject(e){
-        let id = todoModel.getListLength();
+    let id = todoModel.getListLength();
         let name = prompt("what is the name of the project?");
         let desc = prompt("what is the description of the project?");
         viewTodo.createProject(id,name,desc);
-        todoModel.newProject(id,name,desc);
+        todoModel.newProject(name,desc);
         todoModel.getProject();
+        console.log(todoModel.projArr);
    //let project = todoModel.todoProject()
         
-}
+} 
 
 //click on project to get todo's from project
 
@@ -43,11 +44,19 @@ function detailsProject(e){
         console.log(e.target);
         todoModel.getProject(e.target.id);
     }else if(e.target.matches('.removeP')){
-           console.log(e.target);
+           //console.log(e.target.parentNode);
+           let id = e.target.parentNode.id;
+           todoModel.removeProject(id);
+           console.log(todoModel.projArr);
+           viewTodo.removeProj(id);
+           
         } else {
             console.log("wrong");
         }
 }
+
+
+
 
 
 
