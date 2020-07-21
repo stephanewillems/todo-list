@@ -1,26 +1,43 @@
+
+"use strict";
 import { todoModel } from "./model";
 
 const viewTodo = (() =>{
 
 
     //cache DOM
-    let projDiv = document.querySelector('.projectcontent');
+    const projDiv = document.querySelector('.projectcontent');
+    const todoDiv = document.querySelector('.todos');
+ 
     
 
     //Create DomElements
-    let inputProj = document.createElement('button');
-    let projects = document.createElement('div');
-    let projectsList = document.createElement('ul');
+    const inputProj = document.createElement('button');
+    const projects = document.createElement('div');
+    const projectsList = document.createElement('ul');
+    const todoList =  document.createElement('ul');
+    const inputTodo = document.createElement('button');
+    const titleTlist = document.createElement('h1');
+   
     
     //add Classes
     inputProj.classList.add('btn');
     projects.classList.add('projects');
     projectsList.classList.add('ul_plistitems');
-
+    inputTodo.classList.add('btn');
+    titleTlist.classList.add('titleList');
     //Add elements to DOM
     projDiv.appendChild(inputProj);
     projDiv.appendChild(projects);
     projects.appendChild(projectsList);
+   
+    todoDiv.appendChild(titleTlist);
+    todoDiv.appendChild(inputTodo);
+    todoDiv.appendChild(todoList);
+
+    
+    //set display 
+    inputTodo.style.display = "none";
 
 
     function createProject(id,name,desc,task,counter){
@@ -39,15 +56,18 @@ const viewTodo = (() =>{
 
 
     function removeProj(id){
-        let el = document.getElementById(id);
-        let projectlistLi = document.querySelectorAll('.p_listitems');
-        let id_li = 0;
+        let el = document.getElementById(id);  
         el.parentNode.removeChild(el);
-        for(let i = 0; i< todoModel.projArr.length; i++){
-            todoModel.projArr[i]["id"] = i;
-            projectlistLi.setAttribute('id',i);
-        }
-
+          }
+          
+          
+    function setIds(){
+            let projectlistLi = document.querySelectorAll('.p_listitems');
+            let id_li = 0;
+          projectlistLi.forEach((item)=>{
+                item.id = id_li;
+                id_li ++;
+          })
 
         }
 
@@ -62,6 +82,31 @@ const viewTodo = (() =>{
 
     //show todo function
 
+    function createTodo(id,title,description,dueDate){
+        
+        let list = document.createElement('li');
+        let del = document.createElement('button');
+        del.classList.add('removeP');
+        list.setAttribute("id",id);
+        list.classList.add('p_listitems');
+        list.innerHTML= name;
+        list.appendChild(del);
+       todoList.appendChild(list);
+   
+    
+    }
+
+
+    function showTodo(project){
+        const title = document.querySelector('.titleList');
+        title.innerHTML = project["name"]; 
+        let id = project["id"];
+        inputTodo.style.display = "block";
+        inputTodo.setAttribute("data-project",id);
+       
+
+    }
+
 
 
     
@@ -73,7 +118,11 @@ const viewTodo = (() =>{
 return {
             createProject,
             render,
-            removeProj
+            removeProj,
+            setIds,
+            createTodo,
+            showTodo,
+            inputTodo
 }
 
 

@@ -45,7 +45,7 @@ button, input[type="submit"], input[type="reset"] {
   
   .projectcontent { grid-area: projectcontent; border:1px solid rgb(196, 196, 196); border-radius: 5%;overflow-y: scroll;;}
   
-  .todos { grid-area: todos; background-color: darkblue; }
+  .todos { grid-area: todos; border:1px solid rgb(196, 196, 196); }
   .btn{
     margin-top:10px;
     margin-left:10px;
