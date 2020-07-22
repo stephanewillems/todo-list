@@ -39,8 +39,11 @@ function createProject(e){
         let desc = prompt("what is the description of the project?");
         viewTodo.createProject(id,name,desc);
         todoModel.newProject(id,name,desc);
-        todoModel.getProject();
+        //todoModel.getProject();
         console.log(todoModel.projArr);
+        project = todoModel.getProject(id);
+        viewTodo.showTodo(project);
+
    //let project = todoModel.todoProject()
         
 } 
@@ -55,6 +58,8 @@ function detailsProject(e){
         project = todoModel.getProject(e.target.id);
         viewTodo.inputTodo.style.display = "none";
         viewTodo.showTodo(project);
+       /*  viewTodo.renderTodo(project.task); */
+        viewTodo.renderTodo(project.task);
         
     }else if(e.target.matches('.removeP')){
            //console.log(e.target.parentNode);
@@ -82,7 +87,10 @@ function createTodo(e){
         
         let todo = todoModel.newTodo(id,name2,desc2);
         let dataId = e.target.dataset["project"];
+        let project = todoModel.getProject(dataId);
         todoModel.addTask(dataId, todo);
+        viewTodo.renderTodo(project.task);
+        //viewTodo.createTodo(id,name2);
         
    //let project = todoModel.todoProject()
         

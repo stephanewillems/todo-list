@@ -26,6 +26,7 @@ const viewTodo = (() =>{
     projectsList.classList.add('ul_plistitems');
     inputTodo.classList.add('btn');
     titleTlist.classList.add('titleList');
+    todoList.classList.add('todoItems');
     //Add elements to DOM
     projDiv.appendChild(inputProj);
     projDiv.appendChild(projects);
@@ -72,29 +73,39 @@ const viewTodo = (() =>{
         }
 
 
-    function render(){
-        todoModel.projArr.forEach((e) => {
-           // console.log(`${e["id"]}&& ${e["name"]}`);
-           return createProject(e["id"],e["name"],e["desc"]);
-    })
+    function renderTodo(todos){
+            todoList.innerHTML= todos.map((todo,i)=>{
+
+                return `
+                <li data-index = ${i}>
+                    ${todo["title"]}
+                </li>
+                
+                
+                `;
+
+            }).join('');
+    
         }
 
 
     //show todo function
 
-    function createTodo(id,title,description,dueDate){
+   /*  function createTodo(id,title,description,dueDate){
         
+        //add checkbox
+
         let list = document.createElement('li');
         let del = document.createElement('button');
         del.classList.add('removeP');
         list.setAttribute("id",id);
         list.classList.add('p_listitems');
-        list.innerHTML= name;
+        list.innerHTML= title;
         list.appendChild(del);
-       todoList.appendChild(list);
+       todoList.appendChild(list); 
    
     
-    }
+    }*/
 
 
     function showTodo(project){
@@ -103,7 +114,7 @@ const viewTodo = (() =>{
         let id = project["id"];
         inputTodo.style.display = "block";
         inputTodo.setAttribute("data-project",id);
-       
+        
 
     }
 
@@ -117,10 +128,9 @@ const viewTodo = (() =>{
 
 return {
             createProject,
-            render,
+            renderTodo,
             removeProj,
             setIds,
-            createTodo,
             showTodo,
             inputTodo
 }
