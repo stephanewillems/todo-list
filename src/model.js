@@ -2,26 +2,25 @@
 "use strict";
 
 //data handeling, storing data and modifying it.
-import { viewTodo } from "./view"; //IMPORTED VIEW to check amount of Li-items created 
+//IMPORTED VIEW to check amount of Li-items created 
 // Length of UL is to give id-number to project.
 
 const todoModel = (() => {
 
     let projArr = [];
-    let counterP = 0;
-    const _todoProject = (id, name, desc, task = [], counter = 0) => {
-        id = getListLength() - 1;
+
+    const _todoProject = (id, name,task = [], counter = 0) => {
+        
         return {
             id,
             name,
-            desc,
             task,
             counter
         }
     }
 
     const _todoTask = (id, title, description, dueDate = Date.now(), priorety = 0, checked = false) => {
-        id = getTodoLength() - 1;
+       // id = getTodoLength() - 1;
         return {
             id,
             title,
@@ -32,78 +31,54 @@ const todoModel = (() => {
         }
     }
 
-
-
-    function addTask(id, todo) {
-
-        //todo.id = proj.task.length;
-        projArr[id].task.push(todo);
-        _todoProject.counter++;
-       console.log(projArr[id]);
-    }
-
-    function doneTodo(todo) {
-        return !todo.checked ? todo.checked = true : todo.checked = false;
-    }
-
-    //Create new project
-
-    function newProject(name, desc, task, counter) {
-        let project = _todoProject(name, desc, task, counter);
+    function createProject(name){
+        let id;
+        if(_getListLength() == 0) { id = 0}else{ id = _getListLength()}
+        let project = _todoProject(id,name);
         projArr.push(project);
-        return project;
-    }
-//create new todo
-    function newTodo(title, description, dueDate , priorety) {
-
-        let todo = _todoTask(title, description, dueDate, priorety);
-        return todo;
     }
 
+    function _getListLength(){
+        return projArr.length;
+    }
 
-    function getProject(id) {
+    function getProjects(){
+        return projArr;
+    }
+
+    function getProject(id){
         return projArr[id];
-        //return projArr[id];
+    }
+
+    function getTodos(id){
+            return projArr[id]["task"];
+    }
+
+    function removeProject(id){
+        projArr.splice(id,1);
+        return projArr;
+    }
+
+    function setProjectsId(){
+        let idNew = 0;
+        projArr.forEach((item)=>{
+            item.id = idNew;
+            idNew ++;
+        })
     }
 
 
 
-    function removeTodo(proj, todo) {
-        return proj.task.splice(todo.id, 1);
-
-    }
-    function getTodoLength() {
-        return document.querySelectorAll('.todos>ul>li').length;
-    }
-
-    function getListLength() {
-        return document.querySelectorAll('.projects>ul>li').length;
-    }
-
-    function removeProject(id) {
-        return projArr.splice(id, 1);
-
-        //console.log(projArr[id]);
-
-
-    }
-    function setId(item) {
-        return projArr.indexOf(item);
-    }
-
+   
 
 
     return {
-        doneTodo,
-        removeTodo,
-        getListLength,
-        newProject,
-        getProject,
-        removeProject,
-        getTodoLength,
-        projArr,
-        newTodo,
-        addTask
+            createProject,
+            removeProject,
+            setProjectsId,
+            getProjects,
+            getProject,
+            getTodos
     }
 })()
 

@@ -69,7 +69,7 @@ button, input[type="submit"], input[type="reset"] {
   }
 
   /* change to button next to LI!!! */
-.removeP::after{
+.listitem:after{
 
     color:rgb(173, 68, 68);
     content: '\f056'; /* You should use \ and not /*/
