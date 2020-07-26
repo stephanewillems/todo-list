@@ -23,25 +23,36 @@ const viewTodo = (() => {
     }
 
 
-    function renderTodos(todos){
+    function renderTodos(todos = []){
        todoList.innerHTML = todos.map((item,i)=>{
+        
 
-        return `
+  return `
         <li data-todo = ${i}>
-            ${item.title} <button class ="listitem"></button>
+            ${item.title}  <button id="remove" class ="listitem"></button>
 
         </li>
         
         ` ;
+
+                
+        
+      
     
     }).join('');
     }
 
-    function detailsProject(project){
-           todoHeader.innerHTML = `
+    function detailsProject(project = ""){
+        if(!project){
+            todoHeader.innerHTML = ``;
+                } else{
+
+                     todoHeader.innerHTML = `
            <button id="add" class= 'btn' data-todolist = ${project['id']}></button>
            <h1>${project['name']}</h1>
            `;
+                }
+          
 
     }
     

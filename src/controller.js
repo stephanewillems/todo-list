@@ -22,9 +22,22 @@ list.forEach((item)=>{
 
 todosList.forEach((item)=>{
     item.addEventListener('click', addTodo);
+    item.addEventListener('click', removeTodo);
 })
 
 //functions
+function startData(){
+    let name = "example";
+    let project = todoModel.createProject(name);
+    viewTodo.renderProjects(todoModel.getProjects());
+    viewTodo.detailsProject(project);
+    todoModel.createTodo(project.id,"exampletodo","description");
+    viewTodo.renderTodos(project['task']);
+    console.table(todoModel.getProjects());
+}
+
+
+
 
 function addProject(e){
     let name = prompt("what is name of project?");
@@ -42,13 +55,14 @@ function detailRemove(e){
 
        viewTodo.detailsProject(todoModel.getProject(id));
        viewTodo.renderTodos(todoModel.getTodos(id));
-       
+
     }else if(e.target.matches('button')){
 
         todoModel.removeProject(idParent);
         viewTodo.renderProjects(todoModel.getProjects());
         todoModel.setProjectsId();
-
+        viewTodo.renderTodos();
+        viewTodo.detailsProject();
     }else{
        return;
     }
@@ -65,11 +79,28 @@ function addTodo(e){
     }
     
 }
+
+
+function removeTodo(e){
+    let btn = document.querySelector('.todoHeader>button');
+    let id  = btn.dataset.todolist;
+    if(e.target.matches('button[id=remove]')){
+        let project = todoModel.getProject(id);
+        todoModel.removeTodo(btn.dataset.todolist,e.target.parentNode.id);
+        todoModel.setTodosId(id);
+        viewTodo.renderTodos(project['task']);
+    }
+}
+
+return {
+    startData
+}
   
 
 })()
-
+//controlTodo.startData();
 window.onload = (event) => {
+    //controlTodo.startData();
     let existing = localStorage.getItem('project'); // JSON To variable
     existing = existing ? JSON.parse(existing) : {}; // JSON to array
     viewTodo.renderProjects(existing);

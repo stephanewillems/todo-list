@@ -73,10 +73,22 @@ const todoModel = (() => {
         return projArr;
     }
 
+    function removeTodo(idP,idTodo){
+        return projArr[idP]["task"].splice(idTodo,1);
+    }
+
     function setProjectsId(){
         let idNew = 0;
         projArr.forEach((item)=>{
             item.id = idNew;
+            idNew ++;
+        })
+    }
+
+    function setTodosId(id){
+        let idNew = 0;
+        projArr[id]['task'].forEach((item)=>{
+            item.id = idnew;
             idNew ++;
         })
     }
@@ -89,6 +101,8 @@ const todoModel = (() => {
     return {
             createProject,
             createTodo,
+            removeTodo,
+            setTodosId,
             removeProject,
             setProjectsId,
             getProjects,
