@@ -7,9 +7,12 @@ const viewTodo = (() => {
 
     //cache dom
     const projectList = document.querySelector('.ul_plistitems');
+    const todoList = document.querySelector('.todoItems');
+    const todoHeader = document.querySelector('.todoHeader');
 
-    function renderProjects(){
-       projectList.innerHTML =  todoModel.getProjects().map((item,i)=>{
+    
+    function renderProjects(projects){
+       projectList.innerHTML =  projects.map((item,i)=>{
 
         return `
         <li  data-list = ${i}>
@@ -18,10 +21,35 @@ const viewTodo = (() => {
         `;
        }).join('');
     }
+
+
+    function renderTodos(todos){
+       todoList.innerHTML = todos.map((item,i)=>{
+
+        return `
+        <li data-todo = ${i}>
+            ${item.title} <button class ="listitem"></button>
+
+        </li>
+        
+        ` ;
+    
+    }).join('');
+    }
+
+    function detailsProject(project){
+           todoHeader.innerHTML = `
+           <button id="add" class= 'btn' data-todolist = ${project['id']}></button>
+           <h1>${project['name']}</h1>
+           `;
+
+    }
     
 
    return {
-       renderProjects
+       renderProjects,
+       renderTodos,
+       detailsProject
    }
 
 })()

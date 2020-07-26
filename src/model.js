@@ -7,7 +7,7 @@
 
 const todoModel = (() => {
 
-    let projArr = [];
+    let projArr = JSON.parse(localStorage.getItem('project')) || [];
 
     const _todoProject = (id, name,task = [], counter = 0) => {
         
@@ -36,10 +36,15 @@ const todoModel = (() => {
         if(_getListLength() == 0) { id = 0}else{ id = _getListLength()}
         let project = _todoProject(id,name);
         projArr.push(project);
+        localStorage.setItem('project', JSON.stringify(projArr));
+        return project;
     }
 
     function _getListLength(){
         return projArr.length;
+    }
+    function _todoLength(id){
+        return projArr[id]["task"].length;
     }
 
     function getProjects(){
@@ -50,12 +55,21 @@ const todoModel = (() => {
         return projArr[id];
     }
 
+    function createTodo(id,title,desc){
+        let idp = _todoLength(id);
+        let todo = _todoTask(idp,title,desc);
+        getProject(id)["task"].push(todo);
+        getProject(id)["counter"] = idp + 1;
+        localStorage.setItem('project', JSON.stringify(projArr));
+    }
+
     function getTodos(id){
             return projArr[id]["task"];
     }
 
     function removeProject(id){
         projArr.splice(id,1);
+        localStorage.setItem('project', JSON.stringify(projArr));
         return projArr;
     }
 
@@ -74,6 +88,7 @@ const todoModel = (() => {
 
     return {
             createProject,
+            createTodo,
             removeProject,
             setProjectsId,
             getProjects,
