@@ -14,6 +14,9 @@ const controlTodo = (()=>{
 const btn = document.querySelector('.btn');
 const list = document.querySelectorAll('.ul_plistitems');
 const todosList = document.querySelectorAll('.todos');
+const closeBtn = document.querySelector('.close');
+
+
 //eventlisteners
 btn.addEventListener('click', addProject);
 list.forEach((item)=>{
@@ -23,7 +26,14 @@ list.forEach((item)=>{
 todosList.forEach((item)=>{
     item.addEventListener('click', addTodo);
     item.addEventListener('click', removeTodo);
+    item.addEventListener('click', detailTodo);
 })
+
+closeBtn.addEventListener('click',closeModal);
+
+
+
+
 
 //functions
 function startData(){
@@ -41,11 +51,20 @@ function startData(){
 
 function addProject(e){
     let name = prompt("what is name of project?");
-    let project = todoModel.createProject(name);
-    viewTodo.renderProjects(todoModel.getProjects());
-    viewTodo.detailsProject(project);
-    viewTodo.renderTodos(project['task']);
-    console.table(todoModel.getProjects());
+    if (name === ""){
+        return;
+    }else{
+        let project = todoModel.createProject(name);
+       
+        viewTodo.renderProjects(todoModel.getProjects());
+        viewTodo.detailsProject(project);
+        viewTodo.renderTodos(project['task']);
+        
+        console.table(todoModel.getProjects());
+
+    }
+    
+    
 }
 
 function detailRemove(e){
@@ -74,7 +93,9 @@ function addTodo(e){
         let id = e.target.dataset.todolist;
         let project = todoModel.getProject(id);
         let title = prompt('what is the title of the todo?');
-        todoModel.createTodo(id,title, "test");
+        let desc = prompt('add a description:')
+        let prio = prompt('priority');
+        todoModel.createTodo(id,title,desc,prio);
         viewTodo.renderTodos(project['task']);
     }
     
@@ -85,11 +106,34 @@ function removeTodo(e){
     let btn = document.querySelector('.todoHeader>button');
     let id  = btn.dataset.todolist;
     if(e.target.matches('button[id=remove]')){
+        console.log(id);
         let project = todoModel.getProject(id);
-        todoModel.removeTodo(btn.dataset.todolist,e.target.parentNode.id);
+        todoModel.removeTodo(btn.dataset.todolist,e.target.parentNode.dataset.todo);
         todoModel.setTodosId(id);
         viewTodo.renderTodos(project['task']);
+        console.log(todoModel.getTodos(id));
     }
+}
+
+function detailTodo(e){
+
+    if(e.target.matches('li')){
+        let btn = document.querySelector('.todoHeader>button');
+        let todoid = e.target.dataset.todo;
+        let projectid = btn.dataset.todolist;
+        let todo = todoModel.getTodo(projectid,todoid);
+        viewTodo.showModal();
+        viewTodo.showDetailsTodo(todo);
+        const closeBtn = document.querySelector('.close');
+        closeBtn.addEventListener('click',closeModal);
+        
+       //console.log(btn.dataset.todolist,e.target.dataset.todo);
+    }
+}
+
+
+function closeModal(){
+    viewTodo.closeModal()
 }
 
 return {

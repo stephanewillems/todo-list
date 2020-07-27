@@ -9,6 +9,8 @@ const viewTodo = (() => {
     const projectList = document.querySelector('.ul_plistitems');
     const todoList = document.querySelector('.todoItems');
     const todoHeader = document.querySelector('.todoHeader');
+    const modal = document.querySelector('.modal');
+    const modalContent = document.querySelector('.content')
 
     
     function renderProjects(projects){
@@ -16,7 +18,7 @@ const viewTodo = (() => {
 
         return `
         <li  data-list = ${i}>
-            ${item.name} <button class= "listitem"></button>
+            <h4><button class= "listitem"></button> ${item.name}</h4> 
         </li>
         `;
        }).join('');
@@ -29,10 +31,13 @@ const viewTodo = (() => {
 
   return `
         <li data-todo = ${i}>
-            ${item.title}  <button id="remove" class ="listitem"></button>
+            <h3>${item.title}</h3>   
+            ${item.dueDate} 
+            ${item.priorety}
+            <button id="remove" class ="listitem"></button>
 
         </li>
-        
+        <hr>
         ` ;
 
                 
@@ -50,17 +55,42 @@ const viewTodo = (() => {
                      todoHeader.innerHTML = `
            <button id="add" class= 'btn' data-todolist = ${project['id']}></button>
            <h1>${project['name']}</h1>
+
            `;
                 }
           
 
     }
-    
+
+    function showModal(){
+           modal.style.display = "block";
+    }
+
+    function closeModal(){
+        modal.style.display = "none";
+    }
+
+    function showDetailsTodo(todo){
+        
+               modalContent.innerHTML = `
+               <h3>${todo.title}</h3>
+               <p>${todo.description}</p>
+               
+               
+               `;
+
+
+
+    }
 
    return {
        renderProjects,
        renderTodos,
-       detailsProject
+       detailsProject,
+       showDetailsTodo,
+       showModal,
+       closeModal,
+    
    }
 
 })()

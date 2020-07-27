@@ -1,4 +1,4 @@
-
+import moment from 'moment';
 "use strict";
 
 //data handeling, storing data and modifying it.
@@ -19,8 +19,9 @@ const todoModel = (() => {
         }
     }
 
-    const _todoTask = (id, title, description, dueDate = Date.now(), priorety = 0, checked = false) => {
+    const _todoTask = (id, title, description, priorety = 0,dueDate = moment(), checked = false) => {
        // id = getTodoLength() - 1;
+        dueDate = moment().format("MMM Do YY");
         return {
             id,
             title,
@@ -32,6 +33,7 @@ const todoModel = (() => {
     }
 
     function createProject(name){
+        
         let id;
         if(_getListLength() == 0) { id = 0}else{ id = _getListLength()}
         let project = _todoProject(id,name);
@@ -55,9 +57,10 @@ const todoModel = (() => {
         return projArr[id];
     }
 
-    function createTodo(id,title,desc){
+    function createTodo(id,title,desc, prio){
         let idp = _todoLength(id);
-        let todo = _todoTask(idp,title,desc);
+        let todo = _todoTask(idp,title,desc, prio);
+        console.log(todo);
         getProject(id)["task"].push(todo);
         getProject(id)["counter"] = idp + 1;
         localStorage.setItem('project', JSON.stringify(projArr));
@@ -65,6 +68,9 @@ const todoModel = (() => {
 
     function getTodos(id){
             return projArr[id]["task"];
+    }
+    function getTodo(id, idx){
+        return projArr[id]["task"][idx];
     }
 
     function removeProject(id){
@@ -74,7 +80,9 @@ const todoModel = (() => {
     }
 
     function removeTodo(idP,idTodo){
-        return projArr[idP]["task"].splice(idTodo,1);
+        let todo = projArr[idP]["task"].splice(idTodo,1);
+        localStorage.setItem('project', JSON.stringify(projArr));
+        return todo;
     }
 
     function setProjectsId(){
@@ -88,7 +96,7 @@ const todoModel = (() => {
     function setTodosId(id){
         let idNew = 0;
         projArr[id]['task'].forEach((item)=>{
-            item.id = idnew;
+            item.id = idNew;
             idNew ++;
         })
     }
@@ -107,7 +115,8 @@ const todoModel = (() => {
             setProjectsId,
             getProjects,
             getProject,
-            getTodos
+            getTodos,
+            getTodo
     }
 })()
 
