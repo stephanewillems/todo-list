@@ -27,6 +27,7 @@ todosList.forEach((item)=>{
     item.addEventListener('click', addTodo);
     item.addEventListener('click', removeTodo);
     item.addEventListener('click', detailTodo);
+    item.addEventListener('click', toggleDone);
 })
 
 closeBtn.addEventListener('click',closeModal);
@@ -68,15 +69,16 @@ function addProject(e){
 }
 
 function detailRemove(e){
-    let id = e.target.dataset.list;
-    let idParent = e.target.parentNode.dataset.list;
-    if(e.target.matches('li')){
-
-       viewTodo.detailsProject(todoModel.getProject(id));
+    let id = e.target.parentNode.dataset.list;
+    let idParent = e.target.parentNode.parentNode.dataset.list;
+    if(e.target.matches('h4')){
+        console.log();
+       
+      viewTodo.detailsProject(todoModel.getProject(id));
        viewTodo.renderTodos(todoModel.getTodos(id));
 
     }else if(e.target.matches('button')){
-
+        console.log(idParent);
         todoModel.removeProject(idParent);
         viewTodo.renderProjects(todoModel.getProjects());
         todoModel.setProjectsId();
@@ -118,6 +120,7 @@ function removeTodo(e){
 function detailTodo(e){
 
     if(e.target.matches('li')){
+        
         let btn = document.querySelector('.todoHeader>button');
         let todoid = e.target.dataset.todo;
         let projectid = btn.dataset.todolist;
@@ -131,6 +134,15 @@ function detailTodo(e){
     }
 }
 
+function toggleDone(e){
+    if(!e.target.matches('input')) return;
+    e.target.parentNode.classList.toggle("checkedColor");
+    e.target.parentNode.querySelector('h3').classList.toggle("checkedColor");
+    e.target.parentNode.querySelector('p').classList.toggle("checkedColor");
+    
+
+}
+
 
 function closeModal(){
     viewTodo.closeModal()
@@ -142,12 +154,14 @@ return {
   
 
 })()
-//controlTodo.startData();
+
 window.onload = (event) => {
-    //controlTodo.startData();
+   
     let existing = localStorage.getItem('project'); // JSON To variable
     existing = existing ? JSON.parse(existing) : {}; // JSON to array
     viewTodo.renderProjects(existing);
+    viewTodo.detailsProject(existing[0]);
+    viewTodo.renderTodos(existing[0]["task"]);
     
 
   }

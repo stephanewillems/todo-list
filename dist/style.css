@@ -1,110 +1,201 @@
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700&display=swap");
 /* Variables */
 
-
 /* Global */
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+:root {
+  font-family: "Noto Sans JP", sans-serif;
+}
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
-li{
+li {
   width: 100%;
   list-style: none;
 }
-li>h4:hover{
-  background-color: lightgray;
+ul li p, ul li h3 {
+  display:inline;
 }
+ul {
+  text-align: right;
+  margin-right: 1rem;
+}
+
+ul h3{
+  float:left;
+  margin-bottom: 0px;
+}
+
+hr{
+  height: 1px;
+  background-color:rgb(219, 219, 219);
+  border: none; 
+}
+
 
 /* classes */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    gap: 0px 0px;
-    grid-template-areas: ". . . . . ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". . . . . .";
-    height: 100vh;
-  }
-  
-  .container-todo {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 0px 0px;
-    grid-template-areas: "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos";
-    grid-area: container-todo;
-  }
-  
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 0px 0px;
-    grid-template-areas: "header header header" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent";
-    grid-area: projects;
-    
-  }
-  
-  .header { grid-area: header; background-color: coral; }
-  
-  .projectcontent { grid-area: projectcontent; border:1px solid rgb(196, 196, 196); border-radius: 5%;overflow-y: scroll;;}
-  
-  .todos { 
-    grid-area: todos; 
-    border:1px solid rgb(196, 196, 196); 
-    border-radius: 5%;
-  
-  }
-  .btn{
-    margin-top:10px;
-    margin-left:10px;
-    padding: 4px 6px 4px 7px;
-    background:none;
-    border-radius: 70%;
-    border: 1px solid #d3d3d3;
-  }
-
-  .btn::before{
-    color:rgb(83, 83, 83);
-    content: '\f067'; /* You should use \ and not /*/
-    font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
-    font-style: normal;
-    font-weight: 900;
-    font-size:15px;
-  }
-
-  .btn:hover::before{
-    color:rgb(216, 14, 14);
-  }
-
-  /* change to button next to LI!!! */
-.listitem:after{
-
-    color:rgb(173, 68, 68);
-    content: '\f056'; /* You should use \ and not /*/
-    font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
-    font-style: normal;
-    font-weight: 900;
-    font-size:15px;
-    padding-left: 10px;
-
-
-
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0px 0px;
+  grid-template-areas: ". . . . . ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". container-todo container-todo container-todo container-todo ." ". . . . . .";
+  height: 100vh;
 }
 
-.ul_plistitems{
-    grid-column-start: 1;
-    grid-column-end:4;
+.container-todo {
+  display: grid;
+  width: 600px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px 0px;
+  grid-template-areas: "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos" "projects projects todos todos todos";
+  grid-area: container-todo;
+}
+
+.projects {
+  display: grid;
+  width: 200px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px 0px;
+  grid-template-areas: "header header header" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent" "projectcontent projectcontent projectcontent";
+  grid-area: projects;
+}
+
+.header {
+  grid-area: header;
+  background-image: url(./img/to-do-icon-13.png);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 20%;
+}
+.header > h1 {
+  font-size: 18px;
+  text-align: right;
+  margin-right: 2rem;
+  margin-top: 2.5rem;
+  font-weight: bold;
+}
+
+.projectcontent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: "todo todo todo" "todo todo todo" "todo todo todo" "todo todo todo" "button . .";
+  grid-area: projectcontent;
+  /*  border: 1px solid rgb(196, 196, 196); */
+  border-radius: 5%;
+}
+
+.todos {
+  grid-area: todos;
+  width: 400px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 5px 5px 10px #d5d5d5, -5px -5px 10px #ffffff;
+  border-radius: 5%;
+}
+
+.todoHeader{
+  grid-area:header;
+}
+.projectcontent > .btn {
+  grid-area: button;
+  place-self: center;
+}
+.btn {
+  margin: 11px 17px;
+  padding: 1px 7px 2px 7px;
+  border-radius: 150px;
+  background: #f5f5f5;
+  box-shadow: 5px 5px 10px #d0d0d0, -5px -5px 10px #ffffff;
+}
+
+.btn:hover {
+  border-radius: 150px;
+  background: #f5f5f5;
+  box-shadow: inset 5px 5px 10px #d0d0d0, inset -5px -5px 10px #ffffff;
+}
+
+.btn::before {
+  color: rgb(83, 83, 83);
+  content: "\f067"; /* You should use \ and not /*/
+  font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.btn:hover::before {
+  color: rgb(0, 0, 0);
+}
+
+.titleProject {
+  font-size: 15px;
+  float: right;
+  margin-right:40%
+}
+
+/* change to button next to LI!!! */
+.listitem:after {
+  color: rgb(173, 68, 68);
+  content: "\f056"; /* You should use \ and not /*/
+  font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.ul_plistitems > li:hover {
+  background-color: rgb(240, 240, 240);
+}
+.ul_plistitems > li {
+  margin-left: 0px;
+}
+
+li > h4 {
+  font-size: 13px;
+}
+
+.ul_plistitems {
+  grid-area: todo;
+  align-self: start;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  overflow-y: scroll;
+  height: 100%;
+  text-align: center;
+}
+
+.todoItems{
+  grid-area: todos;
 }
 
 
+.singleTodo{
+  font-size:12px;
+  display: inline;
+}
+.checkedColor{
+  text-decoration: line-through;
+  color: rgb(212, 212, 212) !important;
+}
 
+.duedate:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
 /*MODAL*/
 
 /* The Modal (background) */
@@ -118,8 +209,8 @@ li>h4:hover{
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -146,4 +237,17 @@ li>h4:hover{
   cursor: pointer;
 }
 
+.hprio{
 
+  color:#DA0000;
+}
+
+.mprio{
+
+  color:#DA8C00;
+}
+
+.lprio{
+
+  color:#A8DA00;
+}

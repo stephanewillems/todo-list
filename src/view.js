@@ -26,15 +26,18 @@ const viewTodo = (() => {
 
 
     function renderTodos(todos = []){
-       todoList.innerHTML = todos.map((item,i)=>{
         
+       todoList.innerHTML = todos.map((item,i)=>{
+        let prio = item.priorety;
 
   return `
-        <li data-todo = ${i}>
+        <li class="singleTodo" data-todo = ${i}>
+            detail
             <h3>${item.title}</h3>   
-            ${item.dueDate} 
-            ${item.priorety}
+            <p class="duedate">${item.dueDate}</p>             
+            <p class="${_addclass(prio)}">${_switchPriorety(prio)}</p>
             <button id="remove" class ="listitem"></button>
+            <input type="checkbox">
 
         </li>
         <hr>
@@ -47,6 +50,53 @@ const viewTodo = (() => {
     }).join('');
     }
 
+    function _addclass(exp){
+        let prio;
+       
+        switch (exp){
+            case "1":
+                prio = "hprio";
+               
+                break;
+            case "2":
+                prio = "mprio";
+                
+                break;
+            case "3":
+                prio = 'lprio';
+                break;
+                
+
+
+        }
+        return prio;
+    }
+
+    function _switchPriorety(exp){
+        let prio;
+       
+        switch (exp){
+
+            case "0":
+                prio = "no prio";
+                break;
+            case "1":
+                prio = "High Prio";
+               
+                break;
+            case "2":
+                prio = "medium Prio";
+                
+                break;
+            case "3":
+                prio = "Low Prio"
+                
+
+
+        }
+        return prio;
+    }
+
     function detailsProject(project = ""){
         if(!project){
             todoHeader.innerHTML = ``;
@@ -54,7 +104,7 @@ const viewTodo = (() => {
 
                      todoHeader.innerHTML = `
            <button id="add" class= 'btn' data-todolist = ${project['id']}></button>
-           <h1>${project['name']}</h1>
+           <h1 class="titleProject">${project['name']}</h1>
 
            `;
                 }
